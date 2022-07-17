@@ -11,3 +11,11 @@ class Places(models.Model):
 
     def __str__(self):
         return self.title
+
+class Images(models.Model):
+    place = models.ForeignKey(Places, on_delete=models.CASCADE)
+    id_pic = models.PositiveSmallIntegerField()
+    image = models.ImageField(upload_to='places_images/')
+
+    def __str__(self):
+        return str(self.id_pic) + ' ' + str(self.place)
