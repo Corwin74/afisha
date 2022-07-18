@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from django.utils.html import mark_safe
 
 class Places(models.Model):
     title = models.CharField(max_length=255)
@@ -20,3 +19,9 @@ class Images(models.Model):
 
     def __str__(self):
         return str(self.id_pic) + ' ' + str(self.place)
+
+    @property
+    def preview(self):
+        if self.image:
+            return mark_safe(f'<img src="{self.image.url}" height="200" />')
+        return ""
