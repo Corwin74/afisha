@@ -6,6 +6,6 @@ from .views import start_page, place_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('places/<int:place_id>', place_detail),
+    path('places/<int:place_id>', place_detail, name='place_detail'),
     path('', start_page),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

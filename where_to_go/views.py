@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from places.models import Places, Images
 
@@ -21,7 +21,7 @@ def make_geo_feature(title, place_id, longitude, latitude, details_url):
 def start_page(request):
     places = Places.objects.all()
     geo_features = [make_geo_feature(place.title, place.place_id, float(place.longitude),
-                float(place.latitude), '') for place in places]
+                float(place.latitude), '/places/' + str(place.pk)) for place in places]
     geo_json = {'type': 'FeatureCollection', 'features': geo_features}
     return render(request, 'index.html', context={'value': geo_json})
 
