@@ -4,6 +4,7 @@ from django.db import models
 
 class Places(models.Model):
     title = models.CharField(max_length=255)
+    place_id = models.CharField(max_length=128, blank=True)
     description_short = models.TextField()
     description_long = models.TextField()
     longitude = models.CharField(max_length=32)

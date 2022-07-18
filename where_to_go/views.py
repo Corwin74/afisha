@@ -1,11 +1,7 @@
-from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, get_object_or_404
+from places.models import Places, Images
 
-places = [{'title': 'Легенды Москвы', 'place_id': 'moscow_legends',
-           'details_url': '/static/places/moscow_legends.json',
-           'longitude': 37.62, 'latitude': 55.793676},
-           {'title': 'Крыши24.рф', 'place_id': 'roofs24',
-           'details_url': '/static/places/roofs24.json',
-           'longitude': 37.64, 'latitude': 55.753676}]
 
 def make_geo_feature(title, place_id, longitude, latitude, details_url):
     properties_feature = {'title': title,
@@ -22,10 +18,22 @@ def make_geo_feature(title, place_id, longitude, latitude, details_url):
             'properties': properties_feature
             }
 
-geo_features = [make_geo_feature(place['title'], place['place_id'], place['longitude'],
-                place['latitude'], place['details_url']) for place in places]
-
-geo_json = {'type': 'FeatureCollection', 'features': geo_features}
-
 def start_page(request):
+    places = Places.objects.all()
+    geo_features = [make_geo_feature(place.title, place.place_id, float(place.longitude),
+                float(place.latitude), '') for place in places]
+    geo_json = {'type': 'FeatureCollection', 'features': geo_features}
     return render(request, 'index.html', context={'value': geo_json})
+
+def place_detail(request, place_id):
+    place_detail_response = {}
+    place = get_object_or_404(Places, pk=place_id)
+    place_detail_response['title'] = place.title
+    place_detail_response['imgs'] = []
+    place_detail_response['description_short'] = place.description_short
+    place_detail_response['description_long'] = place.description_long
+    place_detail_response['coordinates'] = {'lat': place.latitude, 'lng': place.longitude}
+    images = Images.objects.filter(place=place)
+    place_detail_response['imgs'] = [img.image.url for img in images]
+    return JsonResponse(place_detail_response, json_dumps_params={'ensure_ascii': False,
+                                                                   'indent': 2})
