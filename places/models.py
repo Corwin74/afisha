@@ -1,13 +1,13 @@
 from pickle import FALSE
 from django.db import models
 from django.utils.html import mark_safe
-#from tinymce import models as tinymce_models
+from tinymce.models import HTMLField
 
 class Places(models.Model):
     title = models.CharField(max_length=255)
     place_id = models.CharField(max_length=128, blank=True)
-    description_short = models.TextField()
-    description_long = models.TextField()
+    description_short = HTMLField()
+    description_long = HTMLField()
     longitude = models.CharField(max_length=32)
     latitude = models.CharField(max_length=32)
 
