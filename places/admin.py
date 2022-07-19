@@ -1,20 +1,22 @@
-from django.utils.html import format_html
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminBase, SortableTabularInline
 from .models import Places, Images
 
-class ImageInline(admin.TabularInline):
+class ImageInline(SortableTabularInline):
     model = Images
-    fields = ('place', 'image', 'preview_image', 'id_pic',)
+    fields = ('place', 'image', 'preview_image', 'id_pic')
     readonly_fields = ('preview_image',)
+    extra = 0
 
 
     def preview_image(self, obj):
         return obj.preview
 
 
-class PlacesAdmin(admin.ModelAdmin):
+class PlacesAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [
         ImageInline,
     ]
+
 
 admin.site.register(Places, PlacesAdmin)

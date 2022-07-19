@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #local app
+    #local apps
     'places',
+
+    #3-d party apps
+    'tinymce',
+    'adminsortable2',
 ]
 
 MIDDLEWARE = [
