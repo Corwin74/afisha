@@ -4,9 +4,9 @@
 
 
 ## Пример
-[Пример сайта](http://coffeboy.pythonanywhere.com/map)
+[Пример сайта](https://is.shockland.ru)
 
-[Админка на сайте](http://coffeboy.pythonanywhere.com/admin)
+[Админка на сайте](https://is.shockland.ru/admin)
 
 Данные для входа в админке:
 * Login: `admin`
