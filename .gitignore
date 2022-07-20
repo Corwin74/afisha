@@ -115,3 +115,7 @@ media/
 # !**/migrations
 # !**/migrations/__init__.py
 
+uwsgi_params
+afisha_nginx.conf
+afisha_uwsgi.ini
+wsgi.ini
