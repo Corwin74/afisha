@@ -4,42 +4,41 @@
 
 
 ## Пример
-[Пример сайта](http://neverdieone.pythonanywhere.com/map)
+[Пример сайта](http://coffeboy.pythonanywhere.com/map)
 
-[Админка на сайте](http://neverdieone.pythonanywhere.com/admin)
+[Админка на сайте](http://coffeboy.pythonanywhere.com/admin)
 
 Данные для входа в админке:
 * Login: `admin`
-* Password: `adminadmin`
+* Password: `test123`
 
-## Хочешь такой же?
+## Инструкции по установке
 
 Скачать репозиторий
-* `git clone https://github.com/NeverDieOne/django-afisha.git`
+
+Установить зависимости
+
+* `pip install -r requirements.txt`
 
 В корне проекта создать файл `.env`
 
-Положить внутрь переменную `SECRET_KEY`
+Положить внутрь переменную `SECRET_KEY`, например
 
-Установить зависимости
-* `pip install -r requirements.txt`
+SECRET_KEY=h33%#6*uci8e5(3(9xw(x4^*d=j57t1g(=zccawvjk(+rxmt#d
+
+Сгенерировать свой ключ можно [здесь](https://djecrety.ir/)
 
 Сделать миграции
 * `python manage.py migrate`
 
-Создать суперпользователя
+Создать суперпользователя(администратора)
 * `python manage.py createsuperuser`
 
-Запустить сайт и наслаждаться
-* `python manage.py runserver` (команда не подходит для запуска на боевом сервере, см. ниже)
+Запустить сайт и наслаждаться по адресу http://127.0.0.1/
+* `python manage.py runserver` 
     
 ## Цели проекта
 
 Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
 
 Тестовые данные взяты с сайта [KudaGo](https://kudago.com).
-
-
-## Запуск на боевом сервере
-
-Гайд по деплою проекта Django на боевом сервере от [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04).
