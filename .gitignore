@@ -121,3 +121,5 @@ afisha_uwsgi.ini
 wsgi.ini
 static_root/
 test.py
+db.sqlite3
+

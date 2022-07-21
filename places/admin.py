@@ -17,6 +17,6 @@ class PlacesAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [
         ImageInline,
     ]
-
+    search_fields = ['title',]
 
 admin.site.register(Places, PlacesAdmin)
