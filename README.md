@@ -8,9 +8,6 @@
 
 [Админка на сайте](https://is.shockland.ru/admin)
 
-Данные для входа в админке:
-* Login: `admin`
-* Password: `test123`
 
 ## Инструкции по установке
 
