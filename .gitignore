@@ -120,3 +120,4 @@ afisha_nginx.conf
 afisha_uwsgi.ini
 wsgi.ini
 static_root/
+test.py

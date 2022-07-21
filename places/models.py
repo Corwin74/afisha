@@ -1,15 +1,19 @@
-from pickle import FALSE
+import uuid
 from django.db import models
 from django.utils.html import mark_safe
 from tinymce.models import HTMLField
 
 class Places(models.Model):
     title = models.CharField(max_length=255)
-    place_id = models.CharField(max_length=128, blank=True)
+    place_id = models.UUIDField(primary_key=False, unique=True, default=uuid.uuid4, editable=False)
     description_short = HTMLField()
     description_long = HTMLField()
     longitude = models.CharField(max_length=32)
     latitude = models.CharField(max_length=32)
+
+    class Meta:
+        verbose_name='Место'
+        verbose_name_plural='Места'
 
     def __str__(self):
         return self.title
@@ -17,11 +21,11 @@ class Places(models.Model):
 class Images(models.Model):
     place = models.ForeignKey(Places, on_delete=models.CASCADE)
     id_pic = models.PositiveSmallIntegerField(
-        default=0,
-        blank=FALSE,
-        null=FALSE
+        default=1,
+        blank=False,
+        null=False
     )
-    image = models.ImageField(upload_to='places_images/')
+    image = models.ImageField(upload_to='places_images/') 
 
     def __str__(self):
         return str(self.id_pic) + ' ' + str(self.place)
@@ -34,3 +38,5 @@ class Images(models.Model):
 
     class Meta:
         ordering = ('id_pic',)
+        verbose_name='Картинка'
+        verbose_name_plural='Картинки'
