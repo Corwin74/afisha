@@ -25,7 +25,7 @@ class Images(models.Model):
         blank=False,
         null=False
     )
-    image = models.ImageField(upload_to='places_images/') 
+    image = models.ImageField(upload_to='places_images/')
 
     def __str__(self):
         return str(self.id_pic) + ' ' + str(self.place)
