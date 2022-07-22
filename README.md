@@ -40,9 +40,9 @@ SECRET_KEY=h33%#6*uci8e5(3(9xw(x4^*d=j57t1g(=zccawvjk(+rxmt#d
 Данные с новыми местами можно загрузить командой load_place
 *  `python manage.py load_place <имя json файла>`
 
-Примеры таких файлов лежат в каталоге places_json. Т.е загрузка выглядит так:
+Примеры таких файлов лежат в каталоге places_json. Ссылку на файл можно получить через интерфейс GitHub: выберите файл, откройте его на отдельной странице и нажмите кнопку Raw. Так вы получите ссылку на исходный код файла. Пример загрузки:
 
-*  `python manage.py load_place places_json/roofs24.json`
+*  `python manage.py load_place https://raw.githubusercontent.com/Corwin74/afisha/main/places_json/roofs24.json`
 
 Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
 
