@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=True)
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.localhost', '127.0.0.1', '[::1]'])
 
 # Application definition
 
@@ -25,10 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #local apps
+    # local apps
     'places',
 
-    #3-d party apps
+    # 3-d party apps
     'tinymce',
     'adminsortable2',
 ]
@@ -123,7 +123,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
-if not DEBUG: #SSL production settings
+# SSL production settings
+if not DEBUG:
     SECURE_HSTS_SECONDS = True
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
