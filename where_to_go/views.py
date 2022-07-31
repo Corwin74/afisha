@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from places.models import Places
+from places.models import Place
 
 
 def make_geo_feature(title, place_id, longitude, latitude, details_url):
@@ -21,7 +21,7 @@ def make_geo_feature(title, place_id, longitude, latitude, details_url):
 
 
 def start_page(request):
-    places = Places.objects.all()
+    places = Place.objects.all()
     geo_features = [
         make_geo_feature(
                         place.title,
@@ -38,7 +38,7 @@ def start_page(request):
 
 
 def place_detail(request, place_id):
-    place = get_object_or_404(Places, pk=place_id)
+    place = get_object_or_404(Place, pk=place_id)
     place_detail_response = {
         'title': place.title,
         'description_short': place.description_short,

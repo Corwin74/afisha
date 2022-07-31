@@ -2,24 +2,25 @@ from django.db import models
 from tinymce.models import HTMLField
 
 
-class Places(models.Model):
-    title = models.CharField(max_length=255)
-    description_short = HTMLField()
-    description_long = HTMLField()
+class Place(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    description_short = HTMLField(blank=True)
+    description_long = HTMLField(blank=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=7)
     latitude = models.DecimalField(max_digits=10, decimal_places=7)
 
     class Meta:
         verbose_name = 'Место'
         verbose_name_plural = 'Места'
+        unique_together = ['title', 'longitude', 'latitude']
 
     def __str__(self):
         return self.title
 
 
-class Images(models.Model):
+class Image(models.Model):
     place = models.ForeignKey(
-                             Places,
+                             Place,
                              on_delete=models.CASCADE,
                              related_name='images'
     )
@@ -27,7 +28,7 @@ class Images(models.Model):
     image = models.ImageField(upload_to='places_images/')
 
     def __str__(self):
-        return f'{str(self.order_num)} {str(self.place)}'
+        return f'{self.order_num} {self.place}'
 
     class Meta:
         ordering = ('order_num',)
