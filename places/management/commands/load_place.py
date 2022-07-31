@@ -15,24 +15,27 @@ class Command(BaseCommand):
         response = requests.get(url)
         response.raise_for_status()
         try:    
-            place = response.json()
+            place_import_data = response.json()
         except requests.exceptions.JSONDecodeError:
             print('Error import file -- Bad JSON format!')
             return
         try:
-            title = place['title']               
-            lng, lat = place['coordinates']['lng'], place['coordinates']['lat']
+            title = place_import_data['title']               
+            lng, lat = place_import_data['coordinates']['lng'], place_import_data['coordinates']['lat']
         except KeyError as exc:
             print(f'Error import file -- Missing key: {exc}')
             return
-        imgs = place.get['imgs', []]
-        desc_short = place.get['description_short', '']
-        desc_long = place.get['description_long', '']
+        imgs = place_import_data.get('imgs', [])
+        desc_short = place_import_data.get('description_short', '')
+        desc_long = place_import_data.get('description_long', '')
         place, is_created = Place.objects.get_or_create(
             title=title,
-            latitude=lat,
-            longitude=lng,
-            defaults={'description_short': desc_short, 'description_long': desc_long},
+            defaults={
+                      'description_short': desc_short,
+                      'description_long': desc_long,
+                      'latitude': lat,
+                      'longitude': lng
+            }
         )
         if is_created:
             for index, img in enumerate(imgs, 1):
@@ -46,6 +49,4 @@ class Command(BaseCommand):
                     image=image_content
                 )
         else:
-            print(f'Place {title} exist in database!')
-
-            #place_image_obj.image.save(f'{idx} {place.pk}.jpg', image_content, save=True)
+            print(f'Place "{title}" exist in database!')
